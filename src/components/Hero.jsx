@@ -3,13 +3,14 @@ function Hero() {
     <section className="hero">
       {/* your hero content */}
 
+
     <div className="hero-left">
-      <span className="tagline">Trusted Real Estate Services</span>
-      <p className="since">Advancing in Real Estate Since 2000</p>
-      <h1>Find Your Perfect Home</h1>
-      <p className="intro">Sahni Realtors is your trusted partner in buying, selling, and renting
+      <span className="tagline" data-aos="fade-down" data-aos-delay="100">Trusted Real Estate Services</span>
+      <p className="since" data-aos="fade-down" data-aos-delay="100">Advancing in Real Estate Since 2000</p>
+      <h1 data-aos="fade-up" data-aos-delay="300">Find Your Perfect Home</h1>
+      <p className="intro" data-aos="fade-up" data-aos-delay="400">Sahni Realtors is your trusted partner in buying, selling, and renting
     residential and commercial properties with transparency and expertise.</p>
-    <div className="contact-buttons">
+    <div className="contact-buttons" data-aos="zoom-in" data-aos-delay="500">
 
       <a href="tel:+919312218193" className="btn call-btn">
         Call Now
@@ -23,10 +24,26 @@ function Hero() {
     </div>
     </div>
 
-    <div className="hero-right">
-        {/* Building image */}
-      <img src="/bg3.jpg" alt="Building" className="hero-building" />
-    </div>
+  <div className="hero-right" data-aos="fade-left" data-aos-delay="300">
+    <div className="hero-box">
+  <h3>Your Dream Home Awaits</h3>
+
+  <p>
+    Explore properties or learn more about our services.
+  </p>
+
+  <div className="hero-cta-buttons">
+  <a href="/about" className="btn">
+    Learn More About Us
+  </a>
+
+  <a href="/contact" className="btn secondary-btn">
+    Work With Us
+  </a>
+  </div>
+</div>
+</div>
+    
   </section>
   );
 }

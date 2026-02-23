@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <footer className="footer">
+    <footer className="footer" data-aos="fade-up">
       <p>© 2026 Sahni Realtors. All rights reserved.</p>
       <p>
         Shop no 22, DDA Market Rd, Pocket 3, Mayur Vihar Phase I,
