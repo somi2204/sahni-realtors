@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -14,6 +15,8 @@ import HomeValue from "./pages/HomeValue";
 
 function App() {
 
+  const location = useLocation();
+
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -21,6 +24,11 @@ function App() {
       offset: 100
     });
   }, []);
+
+  useEffect(() => {
+    AOS.refresh();
+  }, [location]);
+
   return (
     <>
       <Navbar />
