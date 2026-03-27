@@ -536,65 +536,6 @@
   font-family: 'Playfair Display', serif;
 }
 
-/* ===============================
-   MOBILE RESPONSIVE
-================================ */
-
-@media (max-width: 768px) {
-
-  /* NAVBAR */
-  .nav-links {
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  /* HERO */
-  .hero {
-    flex-direction: column;
-    text-align: center;
-    padding: 100px 20px 60px 20px;
-  }
-
-  .hero-left h1 {
-    font-size: 36px;
-  }
-
-  .hero-cta-buttons {
-    align-items: center;
-  }
-
-  /* SERVICES */
-  .services {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  /* WHY SECTION */
-  .why-container {
-    flex-direction: column;
-    gap: 60px;
-  }
-
-  .why-container::before {
-    display: none; /* Hide connecting line on mobile */
-  }
-
-  /* FORMS */
-  .form-row {
-    flex-direction: column;
-  }
-
-  .rent-form-wrapper,
-  .contact-form {
-    padding: 30px;
-  }
-
-  /* CTA BOX */
-  .cta-wrapper {
-    flex-direction: column;
-  }
-
-}
 
 /* ===== ABOUT PAGE ===== */
 
