@@ -397,9 +397,10 @@
 @media (max-width: 768px) {
 
   .hero {
-    flex-direction: column;
-    padding: 60px 20px;
+    flex-direction: column;   /* 🔥 MAIN FIX */
+    align-items: center;
     text-align: center;
+    padding: 60px 20px;
     gap: 30px;
   }
 
@@ -426,13 +427,13 @@
 
   .tagline {
     font-size: 14px;
-    letter-spacing: 1.5px;
   }
 
   .intro {
     font-size: 14px;
     line-height: 1.6;
     max-width: 100%;
+    color: #ddd;
   }
 
   .hero-cta-buttons {
