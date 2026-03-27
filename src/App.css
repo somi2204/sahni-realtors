@@ -68,15 +68,16 @@
 @media (max-width: 768px) {
 
   .menu-icon {
-    display: block;
-    font-size: 28px;
-    color: #cfa16b;
-    position: absolute;
-    right: 20px;
-    top: 15px;
-    cursor: pointer;
-    z-index: 2000;
-  }
+  display: block;
+  font-size: 26px;
+  color: #cfa16b;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 2000;
+}
 
   .nav-links {
     position: fixed;
@@ -168,7 +169,6 @@
   }
 
 }
-
 
 /* ===== SERVICES SECTION ===== */
 .section{
@@ -349,6 +349,9 @@
   -webkit-backdrop-filter: blur(10px);
   max-width: 500px;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+  position: relative;
+  z-index: 1;
+  
 }
 
 .intro {
@@ -389,6 +392,67 @@
 .secondary-btn:hover {
   background: #b89b90;
   color: rgb(10, 6, 6);
+}
+
+@media (max-width: 768px) {
+
+  .hero {
+    flex-direction: column;
+    padding: 60px 20px;
+    text-align: center;
+    gap: 30px;
+  }
+
+  .hero-left {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-box {
+    width: 100%;
+    max-width: 100%;
+    padding: 30px 20px;
+  }
+
+  .hero-left h1 {
+    font-size: 30px;
+    line-height: 1.3;
+  }
+
+  .hero-left h1::after {
+    margin: 10px auto 0;
+  }
+
+  .tagline {
+    font-size: 14px;
+    letter-spacing: 1.5px;
+  }
+
+  .intro {
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 100%;
+  }
+
+  .hero-cta-buttons {
+    width: 100%;
+    align-items: center;
+  }
+
+  .btn {
+    width: 100%;
+    max-width: 250px;
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .contact-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
 }
 
 /* CTA CARD */
