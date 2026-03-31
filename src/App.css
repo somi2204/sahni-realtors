@@ -409,7 +409,8 @@
   .hero-left {
     width: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;   
+    align-items: center; 
   }
 
   .hero-box {
@@ -694,6 +695,7 @@
 
   /* ===== CTA ===== */
   .cta-wrapper {
+    margin: 30px 0 !important;
     flex-direction: column !important;
     align-items: center;
   }
@@ -701,6 +703,7 @@
   .cta-box {
     width: 90%;
     max-width: 320px;
+    margin-top: 10px !important;
   }
 
 
