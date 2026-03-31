@@ -11,7 +11,7 @@
 }
 
 .navbar a {
-  color: #cfa16b;
+  color: #d19045;
   text-decoration: none;
   transition: all 0.3s ease;
 }
@@ -39,6 +39,7 @@
 
 .nav-links li {
   display: inline;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 .nav-links a {
@@ -48,6 +49,7 @@
   font-weight: 500;
   padding: 8px 14px;
   border-radius: 6px;
+  font-size: 22px;
 
   position: relative;
   transition: color 0.3s ease, transform 0.3s ease;
@@ -190,7 +192,7 @@
   padding: 20px;
   width: 250px;
   height: 180px;
-  border: 1px solid #cfa16b;
+  border: 2px solid rgba(215, 162, 55, 0.728);
   border-radius: 10px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.08);
   transition: all 0.35s ease;
@@ -268,7 +270,7 @@
 
 .section-divider {
   height: 2px;
-  background: #cfa16b;
+  background: #c09538;
   width: 120px;
   margin: 80px auto;
 }
@@ -287,14 +289,13 @@
 }
 
 .hero-left h1{
-  background: linear-gradient(90deg, #e1a748, #cfa16b);
+  background: linear-gradient(90deg, #d4992ce2, #ce9117de);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
   text-shadow:
-    0 2px 10px rgba(0,0,0,0.8),
-    0 0 10px rgba(207,161,107,0.6),
-    0 0 20px rgba(237, 185, 89, 0.758);
+    0 8px 25px rgba(97, 94, 94, 0.5),
+    0 0 30px rgba(224, 172, 50, 0.836);
 
   font-size: 48px;
   margin: 10px 0;
@@ -306,7 +307,7 @@
   display: block;
   width: 60px;
   height: 3px;
-  background: #9c776a;
+  background: #b78d43;
   margin-top: 10px;
 }
 
@@ -344,13 +345,14 @@
   background: rgba(0, 0, 0, 0.35);  /* dark glass */
   padding: 50px 40px;
   border-radius: 25px;
-  border: 1px solid rgba(212, 167, 79, 0.5); /* soft gold border */
+  border: 1px solid rgba(215, 162, 55, 0.728); /* soft gold border */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   max-width: 500px;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
   position: relative;
   z-index: 1;
+  color: #e1b15f;
   
 }
 
@@ -385,7 +387,7 @@
 
 .secondary-btn {
   background: white;
-  color: #b89b90;
+  color: #b8a790;
   border: 2px solid #b89b90;
 }
 
@@ -460,7 +462,7 @@
 .cta-box {
   background: rgba(0, 0, 0, 0.35);
   padding: 25px 40px 40px 40px;;
-  border: 1px solid rgba(212, 167, 79, 0.5); 
+  border: 1px solid rgba(215, 162, 55, 0.728);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 16px;
@@ -501,7 +503,7 @@
 
 /* Button */
 .btn {
-  background: #D4A74F;
+  background: #d8a02edb;
   color: #1a1a1a;
   padding: 14px 28px;
   border-radius: 30px;
@@ -511,17 +513,18 @@
   margin-top: 8px;
   transition: all 0.3s ease;
   box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  font-weight: bold;
 }
 
 .tagline,
 .since,
 .intro {
-  color: #dad0bd;  
+  color: #e9e5dd;  
   font-size: 25px;            
 }
 
 .btn:hover {
-  background: #D4A74F;
+  background: #cca14a;
 
   box-shadow: 0 0 10px rgba(207, 161, 107, 0.7),
               0 0 20px rgba(207, 161, 107, 0.5),
@@ -716,7 +719,7 @@ body {
   font-family: 'Poppins', sans-serif;
   background:
     linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("/images/background2.png") no-repeat center center fixed;
+    url("/images/background3.png") no-repeat center center fixed;
   color: #cfa16b;
   background-size: cover;
   margin: 0;
@@ -1067,7 +1070,7 @@ body {
   background: rgba(15,15,15,0.35);
   padding: 50px 30px 40px;
   border-radius: 20px;
-  border: 1px solid rgba(212,167,79,0.4);
+  border: 1px solid rgba(200, 150, 50, 0.838);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   transition: 0.4s ease;
