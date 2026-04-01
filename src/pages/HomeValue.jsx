@@ -1,10 +1,79 @@
-import React from "react";
+import React, { useState } from "react";
 
 function HomeValue() {
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    intent: "",
+    type: "",
+    location: "",
+    bedrooms: "",
+    bathrooms: "",
+    size: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const data = {
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      intent: formData.intent,
+      type: formData.type,
+      location: formData.location,
+      bedrooms: formData.bedrooms,
+      bathrooms: formData.bathrooms,
+      size: formData.size,
+      message: formData.message,
+
+      formType: "homeValue",
+    };
+
+    try {
+      const res = await fetch("http://localhost:5000/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await res.json();
+      alert(result.message);
+
+      // reset form
+      setFormData({
+        name: "",
+        phone: "",
+        email: "",
+        intent: "",
+        type: "",
+        location: "",
+        bedrooms: "",
+        bathrooms: "",
+        size: "",
+        message: "",
+      });
+
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong");
+    }
+  };
+
   return (
     <div className="home-value-page">
 
-      {/* HERO SECTION */}
       <section className="value-hero" data-aos="fade-up">
         <h1 className="heading">What Is Your Home Worth?</h1>
 
@@ -12,42 +81,57 @@ function HomeValue() {
           Whether you're planning to sell or rent, knowing your property's true
           market value is the first step toward making a smart decision.
         </p>
-
-        <p className="value-sub">
-          At Sahni Realtors, we provide expert valuations based on real market
-          data, location trends, and demand — so you get the best return from
-          your property.
-        </p>
       </section>
 
-      {/* FORM SECTION */}
       <section className="value-form-section">
 
-        <h2 className="heading2" data-aos="fade-up">
-          Tell Us About Your Property
-        </h2>
+        <h2 className="heading2">Tell Us About Your Property</h2>
 
-        <p className="value-sub" data-aos="fade-up" data-aos-delay="100">
-          Fill in a few details and we will contact you with an estimate.
-        </p>
+        <form className="value-form" onSubmit={handleSubmit}>
 
-        <form
-          className="value-form"
-          data-aos="zoom-in"
-          data-aos-delay="200"
-        >
+          <input
+            type="text"
+            name="name"
+            placeholder="Full Name"
+            required
+            value={formData.name}
+            onChange={handleChange}
+          />
 
-          <input type="text" placeholder="Full Name" required />
-          <input type="tel" placeholder="Phone Number" required />
-          <input type="email" placeholder="Email" />
+          <input
+            type="tel"
+            name="phone"
+            placeholder="Phone Number"
+            required
+            value={formData.phone}
+            onChange={handleChange}
+          />
 
-          <select required>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+          />
+
+          <select
+            name="intent"
+            required
+            value={formData.intent}
+            onChange={handleChange}
+          >
             <option value="">I want to</option>
             <option>Sell my property</option>
             <option>Rent out my property</option>
           </select>
 
-          <select required>
+          <select
+            name="type"
+            required
+            value={formData.type}
+            onChange={handleChange}
+          >
             <option value="">Property Type</option>
             <option>Apartment</option>
             <option>Builder Floor</option>
@@ -55,16 +139,46 @@ function HomeValue() {
             <option>Plot</option>
           </select>
 
-          <input type="text" placeholder="Property Location" />
+          <input
+            type="text"
+            name="location"
+            placeholder="Property Location"
+            value={formData.location}
+            onChange={handleChange}
+          />
 
           <div className="double">
-            <input type="number" placeholder="# of Bedrooms" />
-            <input type="number" placeholder="# of Bathrooms" />
+            <input
+              type="number"
+              name="bedrooms"
+              placeholder="# of Bedrooms"
+              value={formData.bedrooms}
+              onChange={handleChange}
+            />
+
+            <input
+              type="number"
+              name="bathrooms"
+              placeholder="# of Bathrooms"
+              value={formData.bathrooms}
+              onChange={handleChange}
+            />
           </div>
 
-          <input type="text" placeholder="Approx. Size (sq ft)" />
+          <input
+            type="text"
+            name="size"
+            placeholder="Approx. Size (sq ft)"
+            value={formData.size}
+            onChange={handleChange}
+          />
 
-          <textarea placeholder="Anything else you'd like us to know?"></textarea>
+          <textarea
+            name="message"
+            placeholder="Anything else you'd like us to know?"
+            value={formData.message}
+            onChange={handleChange}
+          />
 
           <button type="submit">Submit</button>
 

@@ -1,6 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 
 function Rent() {
+  const [formData, setFormData] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const data = {
+      name: formData.firstname + " " + formData.lastname,
+      email: formData.email,
+      phone: formData.phone,
+      property: "Rent Inquiry",
+      message: formData.message,
+    };
+
+    try {
+      const res = await fetch("http://localhost:5000/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await res.json();
+      alert(result.message || "Something went wrong");
+
+      // 🔄 Reset form after success
+      setFormData({
+        firstname: "",
+        lastname: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong");
+    }
+  };
+
   return (
     <>
       {/* HERO */}
@@ -59,77 +112,115 @@ function Rent() {
 
       {/* WHY US */}
       <section className="why-section">
-  <h2 data-aos="fade-up">Why Choose Sahni Realtors?</h2>
+        <h2 data-aos="fade-up">Why Choose Sahni Realtors?</h2>
 
-  <div className="why-container">
+        <div className="why-container">
+          <div className="why-item" data-aos="zoom-in" data-aos-delay="100">
+            <div className="why-circle">
+              <span className="why-number">01</span>
+              <span className="why-text">Local market experts since 2000</span>
+            </div>
+          </div>
 
-    <div className="why-item" data-aos="zoom-in" data-aos-delay="100">
-      <div className="why-circle">
-        <span className="why-number">01</span>
-        <span className="why-text">Local market experts since 2000</span>
-      </div>
-    </div>
+          <div className="why-item" data-aos="zoom-in" data-aos-delay="200">
+            <div className="why-circle">
+              <span className="why-number">02</span>
+              <span className="why-text">Honest advice, no pressure selling</span>
+            </div>
+          </div>
 
-    <div className="why-item" data-aos="zoom-in" data-aos-delay="200">
-      <div className="why-circle">
-        <span className="why-number">02</span>
-        <span className="why-text">Honest advice, no pressure selling</span>
-      </div>
-    </div>
+          <div className="why-item" data-aos="zoom-in" data-aos-delay="300">
+            <div className="why-circle">
+              <span className="why-number">03</span>
+              <span className="why-text">Strong negotiation support</span>
+            </div>
+          </div>
 
-    <div className="why-item" data-aos="zoom-in" data-aos-delay="300">
-      <div className="why-circle">
-        <span className="why-number">03</span>
-        <span className="why-text">Strong negotiation support</span>
-      </div>
-    </div>
+          <div className="why-item" data-aos="zoom-in" data-aos-delay="400">
+            <div className="why-circle">
+              <span className="why-number">04</span>
+              <span className="why-text">End-to-end assistance</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
-    <div className="why-item" data-aos="zoom-in" data-aos-delay="400">
-      <div className="why-circle">
-        <span className="why-number">04</span>
-        <span className="why-text">End-to-end assistance</span>
-      </div>
-    </div>
+      {/* CTA FORM */}
+      <section className="rent-contact-section">
+        <h2 className="contact-title" data-aos="fade-up">
+          Ready to Get Started?
+        </h2>
 
-  </div>
-</section>
+        <p className="contact-subtitle" data-aos="fade-up" data-aos-delay="150">
+          Let us know a few details and we'll get right back to you.
+        </p>
 
-{/* CTA FORM */}
-<section className="rent-contact-section">
+        <div
+          className="rent-form-wrapper"
+          data-aos="fade-up"
+          data-aos-delay="300"
+        >
+          <form className="rent-contact-form" onSubmit={handleSubmit}>
+            
+            <div className="form-row">
+              <input
+                type="text"
+                name="firstname"
+                placeholder="First Name*"
+                required
+                value={formData.firstname}
+                onChange={handleChange}
+              />
 
-  <h2 className="contact-title" data-aos="fade-up">Ready to Get Started?</h2>
-  <p className="contact-subtitle" data-aos="fade-up"
-    data-aos-delay="150">
-    Let us know a few details and we'll get right back to you.
-  </p>
+              <input
+                type="text"
+                name="lastname"
+                placeholder="Last Name*"
+                required
+                value={formData.lastname}
+                onChange={handleChange}
+              />
+            </div>
 
-  <div className="rent-form-wrapper" data-aos="fade-up"
-    data-aos-delay="300">
+            <div className="form-row">
+              <input
+                type="email"
+                name="email"
+                placeholder="Email*"
+                required
+                value={formData.email}
+                onChange={handleChange}
+              />
 
-    <form className="rent-contact-form">
+              <input
+                type="tel"
+                name="phone"
+                placeholder="Phone*"
+                required
+                value={formData.phone}
+                onChange={handleChange}
+              />
+            </div>
 
-      <div className="form-row">
-        <input type="text" placeholder="First Name*" required />
-        <input type="text" placeholder="Last Name*" required />
-      </div>
+            <textarea
+              name="message"
+              placeholder="Tell us about the home you're looking for..."
+              value={formData.message}
+              onChange={handleChange}
+            />
 
-      <div className="form-row">
-        <input type="email" placeholder="Email*" required />
-        <input type="tel" placeholder="Phone*" required />
-      </div>
+            <button
+              type="submit"
+              className="rent-send-btn"
+              data-aos="zoom-in"
+              data-aos-delay="500"
+            >
+              Send Message
+            </button>
 
-      <textarea placeholder="Tell us about the home you're looking for..."></textarea>
-
-      <button type="submit" className="rent-send-btn" data-aos="zoom-in"
-        data-aos-delay="500">
-        Send Message
-      </button>
-
-    </form>
-
-  </div>
-
-</section>
+          </form>
+        </div>
+      </section>
     </>
   );
 }
