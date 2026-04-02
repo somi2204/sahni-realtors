@@ -148,9 +148,9 @@ app.post("/send-email", async (req, res) => {
     res.json({ message: "Inquiry sent!" });
 
   } catch (err) {
-    console.error("ERROR:", err);
-    res.status(500).json({ message: "Something went wrong" });
-  }
+  console.error("❌ FULL ERROR:", err);
+  res.status(500).json({ message: err.message });
+}
 });
 
 /* ======================
