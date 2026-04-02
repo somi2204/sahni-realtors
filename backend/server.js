@@ -13,10 +13,10 @@ app.use(express.json());
 /* ======================
    MONGODB CONNECTION
 ====================== */
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("✅ MongoDB connected"))
-  .catch((err) => console.log("❌ MongoDB ERROR:", err));
+//mongoose
+//.connect(process.env.MONGO_URI)
+//.then(() => console.log("✅ MongoDB connected"))
+//.catch((err) => console.log("❌ MongoDB ERROR:", err));
 
 /* ======================
    SCHEMA
