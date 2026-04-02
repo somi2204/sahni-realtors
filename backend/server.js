@@ -87,7 +87,7 @@ app.post("/send-email", async (req, res) => {
     /* ======================
        SAVE TO DATABASE
     ====================== */
-    await Lead.create(req.body);
+    //await Lead.create(req.body);
 
     /* ======================
        EMAIL FORMAT LOGIC
