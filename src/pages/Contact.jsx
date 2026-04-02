@@ -20,44 +20,48 @@ function Contact() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const data = {
-      name: `${formData.firstName} ${formData.lastName}`,
-      email: formData.email,
-      phone: formData.phone,
-      property: "Contact Inquiry",
-      message: formData.message,
-      formType: "contact",
-    };
+  console.log("API_URL:", API_URL);
 
-    try {
-      // ✅ CHANGED: localhost → deployed backend
-      const res = await fetch(`${API_URL}/send-email`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      const result = await res.json();
-      alert(result.message);
-
-      // reset
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        message: "",
-      });
-
-    } catch (err) {
-      console.error(err);
-      alert("Something went wrong");
-    }
+  const data = {
+    name: `${formData.firstName} ${formData.lastName}`,
+    email: formData.email,
+    phone: formData.phone,
+    property: "Contact Inquiry",
+    message: formData.message,
+    formType: "contact",
   };
+
+  try {
+    const res = await fetch(`${API_URL}/send-email`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    console.log("STATUS:", res.status);
+
+    const result = await res.json();
+    console.log("RESPONSE:", result);
+
+    alert(result.message);
+
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      message: "",
+    });
+
+  } catch (err) {
+    console.error("ERROR:", err);
+    alert("Error: " + err.message);
+  }
+};
 
   return (
     <section className="contact-section">
