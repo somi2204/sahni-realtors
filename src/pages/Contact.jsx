@@ -9,6 +9,9 @@ function Contact() {
     message: "",
   });
 
+  // ✅ ADDED: API URL from env
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -25,12 +28,12 @@ function Contact() {
       phone: formData.phone,
       property: "Contact Inquiry",
       message: formData.message,
-
-      formType: "contact", // 🔥 optional but useful
+      formType: "contact",
     };
 
     try {
-      const res = await fetch("http://localhost:5000/send-email", {
+      // ✅ CHANGED: localhost → deployed backend
+      const res = await fetch(`${API_URL}/send-email`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
