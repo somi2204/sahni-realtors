@@ -50,11 +50,17 @@ const Lead = mongoose.model("Lead", leadSchema);
    EMAIL CONFIG
 ====================== */
 const transporter = nodemailer.createTransport({
-  service: "gmail", // ✅ simpler + avoids IPv6 issue
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
+  tls: {
+    rejectUnauthorized: false,
+  },
+  family: 4, // 🔥 FORCE IPv4 (MOST IMPORTANT)
 });
 
 /* ======================
