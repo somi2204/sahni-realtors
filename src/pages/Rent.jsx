@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import emailjs from "@emailjs/browser";
 
 function Rent() {
+  const form = useRef();
+
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
@@ -9,6 +12,8 @@ function Rent() {
     message: "",
   });
 
+  const [status, setStatus] = useState("");
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -16,42 +21,35 @@ function Rent() {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    const data = {
-      name: formData.firstname + " " + formData.lastname,
-      email: formData.email,
-      phone: formData.phone,
-      property: "Rent Inquiry",
-      message: formData.message,
-    };
+    setStatus("Sending...");
 
-    try {
-      const res = await fetch("http://localhost:5000/send-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+    emailjs
+      .sendForm(
+        "service_1qm3ngg",
+        "template_wops5wd",
+        form.current,
+        "xgOdug_4KnxfD9CRV"
+      )
+      .then(
+        () => {
+          setStatus("Message sent successfully!");
+
+          setFormData({
+            firstname: "",
+            lastname: "",
+            email: "",
+            phone: "",
+            message: "",
+          });
         },
-        body: JSON.stringify(data),
-      });
-
-      const result = await res.json();
-      alert(result.message || "Something went wrong");
-
-      // 🔄 Reset form after success
-      setFormData({
-        firstname: "",
-        lastname: "",
-        email: "",
-        phone: "",
-        message: "",
-      });
-
-    } catch (err) {
-      console.error(err);
-      alert("Something went wrong");
-    }
+        (error) => {
+  console.error("EMAILJS ERROR:", error);
+  setStatus("Error: " + error.text);
+}
+      );
   };
 
   return (
@@ -160,8 +158,16 @@ function Rent() {
           data-aos="fade-up"
           data-aos-delay="300"
         >
-          <form className="rent-contact-form" onSubmit={handleSubmit}>
+          <form ref={form} className="rent-contact-form" onSubmit={handleSubmit}>
             
+            <input
+              type="text"
+              name="name"
+              value={`${formData.firstname} ${formData.lastname}`}
+              readOnly
+              hidden
+            />
+
             <div className="form-row">
               <input
                 type="text"
@@ -217,6 +223,9 @@ function Rent() {
             >
               Send Message
             </button>
+
+            {/* ✅ ONLY CHANGE: inline status instead of alert */}
+            {status && <p className="form-status">{status}</p>}
 
           </form>
         </div>

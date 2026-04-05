@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import emailjs from "@emailjs/browser";
 
 function HomeValue() {
+  const form = useRef();
+
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -14,6 +17,8 @@ function HomeValue() {
     message: "",
   });
 
+  const [status, setStatus] = useState("");
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -21,54 +26,40 @@ function HomeValue() {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    const data = {
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone,
-      intent: formData.intent,
-      type: formData.type,
-      location: formData.location,
-      bedrooms: formData.bedrooms,
-      bathrooms: formData.bathrooms,
-      size: formData.size,
-      message: formData.message,
+    setStatus("Sending...");
 
-      formType: "homeValue",
-    };
+    emailjs
+      .sendForm(
+        "service_1qm3ngg",      // 🔁 replace
+        "template_ixru0md",     // 🔁 replace (use SAME template as others)
+        form.current,
+        "xgOdug_4KnxfD9CRV"       // 🔁 replace
+      )
+      .then(
+        () => {
+          setStatus("Message sent successfully!");
 
-    try {
-      const res = await fetch("http://localhost:5000/send-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+          setFormData({
+            name: "",
+            phone: "",
+            email: "",
+            intent: "",
+            type: "",
+            location: "",
+            bedrooms: "",
+            bathrooms: "",
+            size: "",
+            message: "",
+          });
         },
-        body: JSON.stringify(data),
-      });
-
-      const result = await res.json();
-      alert(result.message);
-
-      // reset form
-      setFormData({
-        name: "",
-        phone: "",
-        email: "",
-        intent: "",
-        type: "",
-        location: "",
-        bedrooms: "",
-        bathrooms: "",
-        size: "",
-        message: "",
-      });
-
-    } catch (err) {
-      console.error(err);
-      alert("Something went wrong");
-    }
+        (error) => {
+          console.error("EMAILJS ERROR:", error);
+          setStatus("Something went wrong. Try again.");
+        }
+      );
   };
 
   return (
@@ -76,7 +67,6 @@ function HomeValue() {
 
       <section className="value-hero" data-aos="fade-up">
         <h1 className="heading">What Is Your Home Worth?</h1>
-
         <p className="value-sub">
           Whether you're planning to sell or rent, knowing your property's true
           market value is the first step toward making a smart decision.
@@ -87,7 +77,10 @@ function HomeValue() {
 
         <h2 className="heading2">Tell Us About Your Property</h2>
 
-        <form className="value-form" onSubmit={handleSubmit}>
+        <form ref={form} className="value-form" onSubmit={handleSubmit}>
+
+          {/* ✅ identify form type (important for shared template) */}
+          <input type="hidden" name="formType" value="Home Valuation" />
 
           <input
             type="text"
@@ -181,6 +174,9 @@ function HomeValue() {
           />
 
           <button type="submit">Submit</button>
+
+          {/* ✅ inline status (no popup) */}
+          {status && <p className="form-status">{status}</p>}
 
         </form>
 

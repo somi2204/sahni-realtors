@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import emailjs from "@emailjs/browser";
 
 function Contact() {
+  const form = useRef();
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -9,8 +12,7 @@ function Contact() {
     message: "",
   });
 
-  // ✅ ADDED: API URL from env
-  const API_URL = import.meta.env.VITE_API_URL;
+  const [status, setStatus] = useState("");
 
   const handleChange = (e) => {
     setFormData({
@@ -19,49 +21,36 @@ function Contact() {
     });
   };
 
-  const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  console.log("API_URL:", API_URL);
+    setStatus("Sending...");
 
-  const data = {
-    name: `${formData.firstName} ${formData.lastName}`,
-    email: formData.email,
-    phone: formData.phone,
-    property: "Contact Inquiry",
-    message: formData.message,
-    formType: "contact",
+    emailjs
+      .sendForm(
+        "service_1qm3ngg",      // 🔁 replace
+        "template_wops5wd",     // 🔁 replace
+        form.current,
+        "xgOdug_4KnxfD9CRV"       // 🔁 replace
+      )
+      .then(
+        () => {
+          setStatus("Message sent successfully!");
+
+          setFormData({
+            firstName: "",
+            lastName: "",
+            email: "",
+            phone: "",
+            message: "",
+          });
+        },
+        (error) => {
+          console.error(error);
+          setStatus("Something went wrong. Try again.");
+        }
+      );
   };
-
-  try {
-    const res = await fetch(`${API_URL}/send-email`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
-    console.log("STATUS:", res.status);
-
-    const result = await res.json();
-    console.log("RESPONSE:", result);
-
-    alert(result.message);
-
-    setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      message: "",
-    });
-
-  } catch (err) {
-    console.error("ERROR:", err);
-    alert("Error: " + err.message);
-  }
-};
 
   return (
     <section className="contact-section">
@@ -73,7 +62,16 @@ function Contact() {
         <strong>+91 9312218193</strong>.
       </p>
 
-      <form className="contact-form" onSubmit={handleSubmit}>
+      <form ref={form} className="contact-form" onSubmit={handleSubmit}>
+
+        {/* ✅ Combined name for EmailJS */}
+        <input
+          type="text"
+          name="name"
+          value={`${formData.firstName} ${formData.lastName}`}
+          readOnly
+          hidden
+        />
 
         <div className="form-row">
           <input
@@ -125,6 +123,9 @@ function Contact() {
         <button type="submit" className="send-btn">
           SEND
         </button>
+
+        {/* ✅ Clean inline status (no popup) */}
+        {status && <p className="form-status">{status}</p>}
 
       </form>
     </section>
