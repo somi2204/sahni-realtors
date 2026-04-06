@@ -1,5 +1,4 @@
 import React, { useState, useRef } from "react";
-import emailjs from "@emailjs/browser";
 
 function Rent() {
   const form = useRef();
@@ -21,36 +20,41 @@ function Rent() {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    setStatus("Sending...");
+  setStatus("Sending...");
 
-    emailjs
-      .sendForm(
-        "service_1qm3ngg",
-        "template_wops5wd",
-        form.current,
-        "xgOdug_4KnxfD9CRV"
-      )
-      .then(
-        () => {
-          setStatus("Message sent successfully!");
+  try {
+    const formBody = new URLSearchParams({
+      formType: "rentInquiry",
+      name: `${formData.firstname} ${formData.lastname}`,
+      email: formData.email,
+      phone: formData.phone,
+      message: formData.message,
+    });
 
-          setFormData({
-            firstname: "",
-            lastname: "",
-            email: "",
-            phone: "",
-            message: "",
-          });
-        },
-        (error) => {
-  console.error("EMAILJS ERROR:", error);
-  setStatus("Error: " + error.text);
-}
-      );
-  };
+    await fetch("https://script.google.com/macros/s/AKfycbwj5QNkeOhhoCzLdLpdTpjzaBTbD8YnH-XSDGDp36Lz_TNnn5-GdlzIr9slkFkUyDpgwQ/exec", {
+      method: "POST",
+      mode: "no-cors",
+      body: formBody,
+    });
+
+    setStatus("Message sent successfully!");
+
+    setFormData({
+      firstname: "",
+      lastname: "",
+      email: "",
+      phone: "",
+      message: "",
+    });
+
+  } catch (error) {
+    console.error("FETCH ERROR:", error);
+    setStatus("Something went wrong. Try again.");
+  }
+};
 
   return (
     <>
@@ -159,7 +163,7 @@ function Rent() {
           data-aos-delay="300"
         >
           <form ref={form} className="rent-contact-form" onSubmit={handleSubmit}>
-            
+
             <input
               type="text"
               name="name"
@@ -224,7 +228,6 @@ function Rent() {
               Send Message
             </button>
 
-            {/* ✅ ONLY CHANGE: inline status instead of alert */}
             {status && <p className="form-status">{status}</p>}
 
           </form>

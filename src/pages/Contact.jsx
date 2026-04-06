@@ -1,5 +1,4 @@
-import React, { useState, useRef } from "react";
-import emailjs from "@emailjs/browser";
+import React, { useRef, useState } from "react";
 
 function Contact() {
   const form = useRef();
@@ -21,35 +20,40 @@ function Contact() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     setStatus("Sending...");
 
-    emailjs
-      .sendForm(
-        "service_1qm3ngg",      // 🔁 replace
-        "template_wops5wd",     // 🔁 replace
-        form.current,
-        "xgOdug_4KnxfD9CRV"       // 🔁 replace
-      )
-      .then(
-        () => {
-          setStatus("Message sent successfully!");
+    try {
+      const formBody = new URLSearchParams({
+        formType: "contact",
+        name: `${formData.firstName} ${formData.lastName}`,
+        email: formData.email,
+        phone: formData.phone,
+        message: formData.message,
+      });
 
-          setFormData({
-            firstName: "",
-            lastName: "",
-            email: "",
-            phone: "",
-            message: "",
-          });
-        },
-        (error) => {
-          console.error(error);
-          setStatus("Something went wrong. Try again.");
-        }
-      );
+      await fetch("https://script.google.com/macros/s/AKfycbwj5QNkeOhhoCzLdLpdTpjzaBTbD8YnH-XSDGDp36Lz_TNnn5-GdlzIr9slkFkUyDpgwQ/exec", {
+        method: "POST",
+        mode: "no-cors",
+        body: formBody,
+      });
+
+      setStatus("Message sent successfully!");
+
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+
+    } catch (error) {
+      console.error(error);
+      setStatus("Something went wrong. Try again.");
+    }
   };
 
   return (
@@ -62,9 +66,8 @@ function Contact() {
         <strong>+91 9312218193</strong>.
       </p>
 
-      <form ref={form} className="contact-form" onSubmit={handleSubmit}>
+      <form ref={form} className="contact-form" onSubmit={handleSubmit} data-aos="fade-right">
 
-        {/* ✅ Combined name for EmailJS */}
         <input
           type="text"
           name="name"
@@ -124,7 +127,6 @@ function Contact() {
           SEND
         </button>
 
-        {/* ✅ Clean inline status (no popup) */}
         {status && <p className="form-status">{status}</p>}
 
       </form>

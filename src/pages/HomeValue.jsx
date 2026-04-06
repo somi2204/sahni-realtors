@@ -1,5 +1,4 @@
 import React, { useState, useRef } from "react";
-import emailjs from "@emailjs/browser";
 
 function HomeValue() {
   const form = useRef();
@@ -26,40 +25,53 @@ function HomeValue() {
     });
   };
 
-  const handleSubmit = (e) => {
+  // ✅ ONLY THIS FUNCTION CHANGED
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     setStatus("Sending...");
 
-    emailjs
-      .sendForm(
-        "service_1qm3ngg",      // 🔁 replace
-        "template_ixru0md",     // 🔁 replace (use SAME template as others)
-        form.current,
-        "xgOdug_4KnxfD9CRV"       // 🔁 replace
-      )
-      .then(
-        () => {
-          setStatus("Message sent successfully!");
+    try {
+      const formBody = new URLSearchParams({
+        formType: "homeValuation",
 
-          setFormData({
-            name: "",
-            phone: "",
-            email: "",
-            intent: "",
-            type: "",
-            location: "",
-            bedrooms: "",
-            bathrooms: "",
-            size: "",
-            message: "",
-          });
-        },
-        (error) => {
-          console.error("EMAILJS ERROR:", error);
-          setStatus("Something went wrong. Try again.");
-        }
-      );
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        intent: formData.intent,
+        type: formData.type,
+        location: formData.location,
+        bedrooms: formData.bedrooms,
+        bathrooms: formData.bathrooms,
+        size: formData.size,
+        message: formData.message,
+      });
+
+      await fetch("https://script.google.com/macros/s/AKfycbwj5QNkeOhhoCzLdLpdTpjzaBTbD8YnH-XSDGDp36Lz_TNnn5-GdlzIr9slkFkUyDpgwQ/exec", {
+        method: "POST",
+        mode: "no-cors", // 👈 IMPORTANT
+        body: formBody,
+      });
+
+      setStatus("Message sent successfully!");
+
+      setFormData({
+        name: "",
+        phone: "",
+        email: "",
+        intent: "",
+        type: "",
+        location: "",
+        bedrooms: "",
+        bathrooms: "",
+        size: "",
+        message: "",
+      });
+
+    } catch (error) {
+      console.error("FETCH ERROR:", error);
+      setStatus("Something went wrong. Try again.");
+    }
   };
 
   return (
@@ -77,9 +89,8 @@ function HomeValue() {
 
         <h2 className="heading2">Tell Us About Your Property</h2>
 
-        <form ref={form} className="value-form" onSubmit={handleSubmit}>
+        <form ref={form} className="value-form" onSubmit={handleSubmit} data-aos="fade-up">
 
-          {/* ✅ identify form type (important for shared template) */}
           <input type="hidden" name="formType" value="Home Valuation" />
 
           <input
@@ -175,7 +186,6 @@ function HomeValue() {
 
           <button type="submit">Submit</button>
 
-          {/* ✅ inline status (no popup) */}
           {status && <p className="form-status">{status}</p>}
 
         </form>
