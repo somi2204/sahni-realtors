@@ -91,9 +91,9 @@
 
   .topbar-title {
     font-family: 'Playfair Display', serif;
-    font-size: 20px;
+    font-size: 26px;
     color: #d4a74f;
-    letter-spacing: 1.5px;
+    letter-spacing: 2px;
     position: relative;
     display: inline-block;
 
@@ -112,30 +112,32 @@
     height: 2px;
 
     background: linear-gradient(
-      90deg,
-      transparent,
-      #e6c169,
-      transparent
-    );
+    90deg,
+    transparent,
+    #cea33f,
+    #d4a74f,
+    #cea33f,
+    transparent
+  );
 
-    animation: shine 2.5s infinite;
-  }
-
-  @keyframes shine {
-    0% { left: -50%; }
-    100% { left: 100%; }
+  border-radius: 2px;
   }
 
 }
 
 @media (max-width: 768px) {
 
+  .navbar {
+    background: transparent !important;
+    border-bottom: none;
+  }
+
   .menu-icon {
   display: block;
-  font-size: 26px;
-  color: #cfa16b;
+  font-size: 34px;
+  color: #d99d48d6;
   position: absolute;
-  right: 15px;
+  right: 20px;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
@@ -205,30 +207,12 @@
 @media (max-width: 768px) {
 
   .brand {
-    position: relative;
-    padding: 10px 15px;
-    text-align: center;
-
-    background: linear-gradient(90deg, #000, #1a1a1a);
-
-    border-bottom: 1px solid rgba(207,161,107,0.3);
-    overflow: hidden;
+    display: none;
   }
 
   .brand::before,
   .brand::after {
     display: none;
-  }
-
-  .brand h1 {
-    font-size: 24px;
-    letter-spacing: 1.5px;
-    line-height: 1.3;
-    margin: 0;
-    text-align: center;
-
-    color: rgb(206, 160, 69);
-    font-family: 'Playfair Display', serif;
   }
 
 }
@@ -907,7 +891,7 @@ body {
 
   body {
     background: none;
-    padding-top: 50px;
+    padding-top: 70px;
   }
 
   body::before {
