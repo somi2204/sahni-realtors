@@ -613,6 +613,11 @@
     width: 100% !important;
   }
 
+   .hero-right {
+    display: flex;
+    justify-content: center;   
+  }
+
   .hero-left {
     display: flex;
     flex-direction: column;
