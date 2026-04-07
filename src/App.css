@@ -72,34 +72,39 @@
 
 @media (max-width: 768px) {
 
-  .topbar {
-    display: block;
+  @media (max-width: 768px) {
 
+  .mobile-menu {
     position: fixed;
     top: 0;
-    left: 0;
-    width: 100%;
+    right: -100%;
 
-    padding: 10px 15px;
-    text-align: center;
+    width: 70%;
+    height: 100vh;
 
-    background: rgba(0, 0, 0, 0.35);
-    backdrop-filter: blur(8px);
+    background: #111;
 
-    z-index: 3000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+
+    transition: 0.4s ease;
+    z-index: 2500;
   }
 
-  .topbar-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 26px;
-    color: #d4a74f;
-    letter-spacing: 2px;
-    position: relative;
-    display: inline-block;
-
-    text-shadow:
-      0 0 10px rgba(212,167,79,0.4);
+  .mobile-menu.active {
+    right: 0;
   }
+
+  .mobile-menu a {
+    color: #e6c169;
+    font-size: 20px;
+    text-decoration: none;
+  }
+
+}
 
   /* ✨ shine animation */
   .topbar-title::after {
@@ -127,22 +132,44 @@
 
 @media (max-width: 768px) {
 
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+
+    width: 70%;
+    height: 100vh;
+
+    background: #111;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+
+    transition: 0.4s ease;
+    z-index: 2500;
+  }
+
+  .mobile-menu.active {
+    right: 0;
+  }
+
+  .mobile-menu a {
+    color: #e6c169;
+    font-size: 20px;
+    text-decoration: none;
+  }
+
+}
+
+@media (max-width: 768px) {
+
   .navbar {
     background: transparent !important;
     border-bottom: none;
   }
-
-  .menu-icon {
-  display: block;
-  font-size: 34px;
-  color: #d99d48d6;
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  z-index: 2000;
-}
 
   .nav-links {
     position: fixed;
@@ -891,7 +918,7 @@ body {
 
   body {
     background: none;
-    padding-top: 70px;
+    padding-top: 40px;
   }
 
   body::before {

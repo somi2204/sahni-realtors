@@ -9,11 +9,6 @@ function Navbar() {
     <header>
       <nav className="navbar">
 
-        {/* HAMBURGER */}
-        <div className="menu-icon" onClick={() => setMenuOpen(!menuOpen)}>
-          ☰
-        </div>
-
         {/* LINKS */}
         <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
           <li><Link to="/home" onClick={() => setMenuOpen(false)}>Home</Link></li>
