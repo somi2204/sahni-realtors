@@ -97,7 +97,7 @@
 
   /* BIGGER TITLE 🔥 */
   .topbar-title {
-    font-size: 28px;   /* 🔥 bigger */
+    font-size: 34px;   /* 🔥 bigger */
     font-family: 'Playfair Display', serif;
     color: #d4a74f;
     letter-spacing: 2px;
@@ -934,7 +934,7 @@ body {
 
   body {
     background: none;
-    padding-top: 50px;
+    padding-top: 20px;
   }
 
   body::before {
