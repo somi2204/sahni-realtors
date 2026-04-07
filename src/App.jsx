@@ -32,6 +32,7 @@ function App() {
 
   return (
     <>
+      <TopBar />
       <Navbar />
 
       <Routes>
