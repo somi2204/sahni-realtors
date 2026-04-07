@@ -714,8 +714,6 @@
 
 }
 
-
-
 /* ===== ABOUT PAGE ===== */
 
 body {
@@ -839,6 +837,22 @@ body {
 }
 
 @media (max-width: 768px) {
+
+  body {
+    background: none;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    background:
+      linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+      url("/images/background3.png") center/cover no-repeat;
+
+    z-index: -1;
+  }
 
   .about-intro {
     padding: 120px 20px 60px;
