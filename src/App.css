@@ -1,6 +1,10 @@
+.topbar {
+  display: none;
+}
+
 .navbar {
-  background: linear-gradient(90deg, #d7a363, #1a1a1a, #2b2118);
-  border-bottom: 1px solid rgba(207, 161, 107, 0.3);
+  background: linear-gradient(90deg, #a68743, #382e1f, #796235);
+  border-bottom: 2px solid rgba(5, 4, 2, 0.831);
   padding: 18px 8%;
   display: flex;
   justify-content: center;
@@ -64,6 +68,64 @@
 
 .menu-icon {
   display: none;
+}
+
+@media (max-width: 768px) {
+
+  .topbar {
+    display: block;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    padding: 10px 15px;
+    text-align: center;
+
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(8px);
+
+    z-index: 3000;
+  }
+
+  .topbar-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: #d4a74f;
+    letter-spacing: 1.5px;
+    position: relative;
+    display: inline-block;
+
+    text-shadow:
+      0 0 10px rgba(212,167,79,0.4);
+  }
+
+  /* ✨ shine animation */
+  .topbar-title::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: -50%;
+
+    width: 200%;
+    height: 2px;
+
+    background: linear-gradient(
+      90deg,
+      transparent,
+      #e6c169,
+      transparent
+    );
+
+    animation: shine 2.5s infinite;
+  }
+
+  @keyframes shine {
+    0% { left: -50%; }
+    100% { left: 100%; }
+  }
+
 }
 
 @media (max-width: 768px) {
@@ -845,6 +907,7 @@ body {
 
   body {
     background: none;
+    padding-top: 50px;
   }
 
   body::before {
