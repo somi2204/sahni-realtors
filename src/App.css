@@ -162,6 +162,10 @@
     transition: 0.4s ease;
   }
 
+  .nav-links li {
+  list-style: none !important;
+}
+
   .nav-links.active {
     right: 0;
   }
