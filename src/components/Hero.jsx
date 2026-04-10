@@ -8,7 +8,7 @@ function Hero() {
       <span className="tagline" data-aos="fade-down" data-aos-delay="100">Trusted Real Estate Services</span>
       <p className="since" data-aos="fade-down" data-aos-delay="100">Advancing in Real Estate Since 2000</p>
       <h1 data-aos="fade-up" data-aos-delay="300">Find Your Perfect Home</h1>
-      <p className="intro" data-aos="fade-up" data-aos-delay="400">Sahni Realtors is your trusted partner in buying, selling, and renting
+      <p className="intro" data-aos="fade-up" data-aos-delay="400">Sahni Properties is your trusted partner in buying, selling, and renting
     residential and commercial properties with transparency and expertise.</p>
     <div className="contact-buttons" data-aos="zoom-in" data-aos-delay="500">
 

@@ -63,7 +63,7 @@ function Rent() {
         <h1>Find the Right Place to Call Home</h1>
         <p>
           Whether you're buying your forever home or renting your next space,
-          Sahni Realtors makes the journey smooth and stress-free.
+          Sahni Properties makes the journey smooth and stress-free.
         </p>
 
         <button className="hero-btn">Explore Properties</button>
@@ -114,7 +114,7 @@ function Rent() {
 
       {/* WHY US */}
       <section className="why-section">
-        <h2 data-aos="fade-up">Why Choose Sahni Realtors?</h2>
+        <h2 data-aos="fade-up">Why Choose Sahni Properties?</h2>
 
         <div className="why-container">
           <div className="why-item" data-aos="zoom-in" data-aos-delay="100">

@@ -1,7 +1,7 @@
 function BrandHeader() {
   return (
     <section className="brand">
-      <h1>SAHNI REALTORS</h1>
+      <h1>SAHNI PROPERTIES</h1>
     </section>
   );
 }

@@ -5,10 +5,10 @@ function About() {
     <>
       {/* Intro Section */}
       <section className="about-intro" data-aos="fade-up">
-        <h1>About Sahni Realtors</h1>
+        <h1>About Sahni Properties</h1>
 
         <p>
-          Sahni Realtors has been serving clients in Mayur Vihar Phase 1, Delhi since 2000,
+          Sahni Properties has been serving clients in Mayur Vihar Phase 1, Delhi since 2000,
           offering expert property consulting and real estate services.
           With deep knowledge of the local market, we help clients buy,
           sell, and manage properties with confidence.
